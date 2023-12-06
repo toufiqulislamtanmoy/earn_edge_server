@@ -36,6 +36,7 @@ async function run() {
         client.connect();
         const userCollections = client.db("rw").collection("users");
         const fqaCollections = client.db("rw").collection("fqa");
+        const taskCollections = client.db("rw").collection("tasks");
 
         /********Create user*******/
         app.post("/users", async (req, res) => {
@@ -59,6 +60,14 @@ async function run() {
         /******** Users GET API*******/
         app.get("/allusers", async (req, res) => {
             const result = await userCollections.find().toArray();
+            res.send(result);
+
+        })
+        
+        
+        /******** Tasks GET API*******/
+        app.get("/tasks", async (req, res) => {
+            const result = await taskCollections.find().toArray();
             res.send(result);
 
         })
